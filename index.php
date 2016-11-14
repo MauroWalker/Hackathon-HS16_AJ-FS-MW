@@ -50,7 +50,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Bock auf Reisen</a>
+                <a class="navbar-brand" href="home.php">Bock auf Reisen</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
