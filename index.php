@@ -1,3 +1,75 @@
+<?php
+  session_start();
+  if(isset($_SESSION['id'])) unset($_SESSION['id']);
+  session_destroy();
+
+  require_once('system/data.php');
+  require_once('system/security.php');
+
+  $error = false;
+  $error_msg = "";
+  $success = false;
+  $success_msg = "";
+
+
+  if(isset($_POST['login-submit'])){
+    if(!empty($_POST['username']) && !empty($_POST['password'])){
+      $username = filter_data($_POST['username']);
+      $password = filter_data($_POST['password']);
+
+      $result = login($email, $password);
+
+      $row_count = mysqli_num_rows($result);
+
+      if($row_count == 1){
+        $user = mysqli_fetch_assoc($result);
+        session_start();
+        $_SESSION['id'] = $user['User_id'];
+        header("Location:home.php");
+      }else {
+        $error = true;
+        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.<br/>";
+      }
+    }else {
+      $error = true;
+      $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
+    }
+  }
+
+  if(isset($_POST['register-submit'])){
+    if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm-password']) && !empty($_POST['email'] && !empty($_POST['plz']) && !empty($_POST['ort']) && !empty($_POST['ga'])){
+        $username = filter_data($_POST['username']);
+        $email = filter_data($_POST['email']);
+        $password = filter_data($_POST['password']);
+        $password_confirm = filter_data($_POST['password_confirm']);
+        $plz = filter_data($_POST['plz']);
+        $ort = filter_data($_POST['ort']);
+        $ga = filter_data($_POST['ga']);
+
+      if($password == $password_confirm){
+        if(register($username, $email, $password, $plz, $ort, $ga)){
+          $success = true;
+          $success_msg .= "Sie haben sich erfolgreich registriert.<br/>";
+          $success_msg .= "Bitte loggen Sie sich jetzt ein.<br/>";
+        }else{
+          $error = true;
+          $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.";
+        }
+      }else{
+        $error = true;
+        $error_msg .= "Bitte überprüfen Sie die Passworteingabe.<br/>";
+      }
+    }else {
+      $error = true;
+      $error_msg .= "Bitte füllen Sie alle Felder aus.<br/>";
+    }
+  }
+
+
+
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -50,7 +122,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Bock auf Reisen</a>
+                <a class="navbar-brand" href="home.php">Bock auf Reisen</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -87,7 +159,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                <form id="login-form" action="index.php" method="post" role="form" style="display: block;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -112,14 +184,14 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="text-center">
-                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Passwort vergessen?</a>
+                                                    <a href="" tabindex="5" class="forgot-password">Passwort vergessen?</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
 
-                                <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                <form id="register-form" action="index.php" method="post" role="form" style="display: none;">
                                     <div class="form-group">
                                         <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                     </div>
@@ -129,23 +201,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
+                                        <input type="password" name="confirm-password" id="password_confirm" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
                                     </div>
 
                                     <div class="form-group">
                                         <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email-Addresse" value="">
                                     </div>
-
-                                    <div class="form-group">
-                                        Geschlecht
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" id="male">männlich</label>
-                                        </div>
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" id="female">weiblich</label>
-                                        </div>
 
                                         <div class="form-group">
                                             <input type="text" name="plz" id="plz" tabindex="2" class="form-control" placeholder="PLZ">
@@ -154,19 +215,24 @@
                                         <div class="form-group">
                                             <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
+                                                                            <div class="form-group" id="ga">
                                         Hast du ein GA?
 
                                         <div class="radio">
-                                            <label><input type="radio" name="optradio" id="ga_yes">ja</label>
+                                            <label><input type="radio" name="ga_yes" id="ga_yes">ja</label>
                                         </div>
 
                                         <div class="radio">
-                                            <label><input type="radio" name="optradio" id="ga_no">nein</label>
+                                            <label><input type="radio" name="ga_no" id="ga_no">nein</label>
                                         </div>
                                     </div>
+
+
+
+                                    </div>
+
+
 
                                     <div class="form-group">
                                         <div class="row">
