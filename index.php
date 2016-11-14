@@ -50,7 +50,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"></button> <a class="navbar-brand" href="#">Bock auf Reisen</a>
+                <a class="navbar-brand" href="#">Bock auf Reisen</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -67,123 +67,120 @@
 
     <div class="container-fluid text-center">
         <div class="row content">
-                <!--- Login Formular =-->
+            <!--- Login Formular =-->
 
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="panel panel-login">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <a href="#" class="active" id="login-form-link">Login</a>
-                                </div>
-
-                                <div class="col-xs-6">
-                                    <a href="#" id="register-form-link">Registrieren</a>
-                                </div>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-login">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="active" id="login-form-link">Login</a>
                             </div>
-                            <hr>
-                        </div>
 
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
-                                        <div class="form-group">
-                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Passwort">
-                                        </div>
-
-                                        <div class="form-group text-center">
-                                            <input type="checkbox" tabindex="3" class="" name="remember" id="remember"> <label for="remember">Eingeloggt bleiben</label>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-sm-6 col-sm-offset-3">
-                                                    <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="text-center">
-                                                        <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Passwort vergessen?</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
-                                        <div class="form-group">
-                                            <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email-Addresse" value="">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Passwort">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
-                                        </div>
-
-                                        <div class="form-group">
-                                            Geschlecht
-
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" id="male">männlich</label>
-                                            </div>
-
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" id="female">weiblich</label>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="text" name="plz" id="plz" tabindex="2" class="form-control" placeholder="PLZ">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
-                                            </div>
-                                            
-                                        </div>
-                                            
-                                            
-                                            <div class="form-group">
-                                            Hast du ein GA?
-
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" id="ga_yes">ja</label>
-                                            </div>
-
-                                            <div class="radio">
-                                                <label><input type="radio" name="optradio" id="ga_no">nein</label>
-                                            </div>
-                                            
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-sm-offset-3">
-                                                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrieren">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                            <div class="col-xs-6">
+                                <a href="#" id="register-form-link">Registrieren</a>
                             </div>
                         </div>
-                </div><script type="text/javascript">
+                        <hr>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Passwort">
+                                    </div>
+
+                                    <div class="form-group text-center">
+                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember"> <label for="remember">Eingeloggt bleiben</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Passwort vergessen?</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Passwort">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email-Addresse" value="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        Geschlecht
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio" id="male">männlich</label>
+                                        </div>
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio" id="female">weiblich</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="plz" id="plz" tabindex="2" class="form-control" placeholder="PLZ">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        Hast du ein GA?
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio" id="ga_yes">ja</label>
+                                        </div>
+
+                                        <div class="radio">
+                                            <label><input type="radio" name="optradio" id="ga_no">nein</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Registrieren" action="register">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><script type="text/javascript">
 $(function() {
 
                 $('#login-form-link').click(function(e) {
@@ -202,9 +199,8 @@ $(function() {
                 });
 
                 });
-                </script> <!--- Login Formular =-->
-            </div>
-
+            </script> <!--- Login Formular =-->
+        </div>
     </div><?php include ("footer.php"); ?>
 </body>
 </html>
