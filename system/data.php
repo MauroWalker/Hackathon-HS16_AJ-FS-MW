@@ -28,8 +28,8 @@
     return get_result($sql);
   }
 
-  function register($email , $password){
-    $sql = "INSERT INTO user (email, password, confirm-password, email, plz, ort, ga) VALUES ('$username', '$password', '$confirm-password' , '$email', "$plz", "$ga");";
+  function register($email , $password, $confirm_password, $email, $plz, $ort, $ga){
+    $sql = "INSERT INTO user (username, password, confirm_password, email, plz, ort, ga) VALUES ('$username', '$password', '$password_confirm' , '$email', "$plz", "$ort", $ga");";
 		return get_result($sql);
 	}
 
