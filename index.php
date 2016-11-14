@@ -1,3 +1,75 @@
+<?php
+  session_start();
+  if(isset($_SESSION['id'])) unset($_SESSION['id']);
+  session_destroy();
+
+  require_once('system/data.php');
+  require_once('system/security.php');
+
+  $error = false;
+  $error_msg = "";
+  $success = false;
+  $success_msg = "";
+
+
+  if(isset($_POST['login-submit'])){
+    if(!empty($_POST['username']) && !empty($_POST['password'])){
+      $username = filter_data($_POST['username']);
+      $password = filter_data($_POST['password']);
+
+      $result = login($email, $password);
+
+      $row_count = mysqli_num_rows($result);
+
+      if($row_count == 1){
+        $user = mysqli_fetch_assoc($result);
+        session_start();
+        $_SESSION['id'] = $user['User_id'];
+        header("Location:home.php");
+      }else {
+        $error = true;
+        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.<br/>";
+      }
+    }else {
+      $error = true;
+      $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
+    }
+  }
+
+  if(isset($_POST['register-submit'])){
+    if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm-password']) && !empty($_POST['email'] && !empty($_POST['plz']) && !empty($_POST['ort']) && !empty($_POST['ga'])){
+        $username = filter_data($_POST['username']);
+        $email = filter_data($_POST['email']);
+        $password = filter_data($_POST['password']);
+        $password_confirm = filter_data($_POST['password_confirm']);
+        $plz = filter_data($_POST['plz']);
+        $ort = filter_data($_POST['ort']);
+        $ga = filter_data($_POST['ga']);
+
+      if($password == $password_confirm){
+        if(register($username, $email, $password, $plz, $ort, $ga)){
+          $success = true;
+          $success_msg .= "Sie haben sich erfolgreich registriert.<br/>";
+          $success_msg .= "Bitte loggen Sie sich jetzt ein.<br/>";
+        }else{
+          $error = true;
+          $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.";
+        }
+      }else{
+        $error = true;
+        $error_msg .= "Bitte überprüfen Sie die Passworteingabe.<br/>";
+      }
+    }else {
+      $error = true;
+      $error_msg .= "Bitte füllen Sie alle Felder aus.<br/>";
+    }
+  }
+
+
+
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -143,7 +215,7 @@
                                         <div class="form-group">
                                             <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
                                         </div>
-                                        
+
                                                                             <div class="form-group" id="ga">
                                         Hast du ein GA?
 
@@ -155,9 +227,9 @@
                                             <label><input type="radio" name="optradio" id="ga_no">nein</label>
                                         </div>
                                     </div>
-                                        
-                                        
-                                        
+
+
+
                                     </div>
 
 
