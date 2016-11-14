@@ -122,7 +122,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Bock auf Reisen</a>
+                <a class="navbar-brand" href="home.php">Bock auf Reisen</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -201,7 +201,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
+                                        <input type="password" name="confirm-password" id="password_confirm" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
                                     </div>
 
                                     <div class="form-group">
@@ -220,11 +220,11 @@
                                         Hast du ein GA?
 
                                         <div class="radio">
-                                            <label><input type="radio" name="optradio" id="ga_yes">ja</label>
+                                            <label><input type="radio" name="ga_yes" id="ga_yes">ja</label>
                                         </div>
 
                                         <div class="radio">
-                                            <label><input type="radio" name="optradio" id="ga_no">nein</label>
+                                            <label><input type="radio" name="ga_no" id="ga_no">nein</label>
                                         </div>
                                     </div>
 
