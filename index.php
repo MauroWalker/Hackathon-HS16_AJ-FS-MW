@@ -136,17 +136,6 @@
                                         <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email-Addresse" value="">
                                     </div>
 
-                                    <div class="form-group">
-                                        Geschlecht
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" id="male">männlich</label>
-                                        </div>
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="optradio" id="female">weiblich</label>
-                                        </div>
-
                                         <div class="form-group">
                                             <input type="text" name="plz" id="plz" tabindex="2" class="form-control" placeholder="PLZ">
                                         </div>
@@ -156,7 +145,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group" id="ga">
                                         Hast du ein GA?
 
                                         <div class="radio">
