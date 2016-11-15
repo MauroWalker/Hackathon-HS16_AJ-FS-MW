@@ -1,12 +1,12 @@
 <?php
 
-  function get_db_connection()
-  {
+	function get_db_connection()
+	{
     $db = mysqli_connect('localhost', '260978_3_1', 'gQZTGEbRdq8s', '260978_3_1')
       or die('Fehler beim Verbinden mit dem Datenbank-Server.');
-      mysqli_set_charset($db, "utf8");
-    return $db;
-  }
+  		mysqli_query($db, "SET NAMES 'utf8'");
+		return $db;
+	}
 
   function get_result($sql)
   {
@@ -22,14 +22,13 @@
 	/* Login index.php
 	/* ****************************************************** */
 
-  function login($email, $password)
-  {
-    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password';";
-    return get_result($sql);
-  }
+	function login($username , $password){
+		$sql = "SELECT * FROM Users WHERE username = '".$username."' AND password = '".$password."';";
+		return get_result($sql);
+	}
 
-  function register($email , $password, $confirm_password, $email, $plz, $ort, $ga){
-    $sql = "INSERT INTO user (username, password, confirm_password, email, plz, ort, ga) VALUES ('$username', '$password', '$password_confirm' , '$email', "$plz", "$ort", $ga");";
+	function register($username , $password, $email, $plz, $ort){
+    $sql = "INSERT INTO Users (username, password, email, plz, ort, ga) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
 

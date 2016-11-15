@@ -6,7 +6,7 @@
 
     $input = strip_tags($input);
     $input = trim($input);
-    $input = mysqli_real_escape_string($db, $input;)
+    $input = mysqli_real_escape_string($db, $input);
     mysqli_close($db);
     return $input;
   };

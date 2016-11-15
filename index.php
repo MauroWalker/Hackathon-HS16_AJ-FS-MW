@@ -17,51 +17,52 @@
       $username = filter_data($_POST['username']);
       $password = filter_data($_POST['password']);
 
-      $result = login($email, $password);
+      $result = login($username,$password);
 
-      $row_count = mysqli_num_rows($result);
-
-      if($row_count == 1){
-        $user = mysqli_fetch_assoc($result);
+  		$row_count = mysqli_num_rows($result);
+      if( $row_count == 1){
         session_start();
-        $_SESSION['id'] = $user['User_id'];
+        $username = mysqli_fetch_assoc($result);
+        $_SESSION['userid'] = $username['user_id'];
         header("Location:home.php");
-      }else {
+      }else{
+        // Fehlermeldungen werden erst später angezeigt
         $error = true;
-        $error_msg .= "Leider konnten wir ihre E-Mailadresse oder ihr Passwort nicht finden.<br/>";
+        $error_msg .= "Leider konnte wir Ihre E-Mailadresse oder Ihr Passwort nicht finden.</br>";
       }
-    }else {
+    }else{
       $error = true;
-      $error_msg .= "Bitte füllen Sie beide Felder aus.<br/>";
+      $error_msg .= "Bitte füllen Sie beide Felder aus.</br>";
     }
   }
 
   if(isset($_POST['register-submit'])){
-    if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['confirm-password']) && !empty($_POST['email'] && !empty($_POST['plz']) && !empty($_POST['ort']) && !empty($_POST['ga'])){
+    if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password_confirm']) && !empty($_POST['email']) && !empty($_POST['plz']) && !empty($_POST['ort'])){
         $username = filter_data($_POST['username']);
-        $email = filter_data($_POST['email']);
         $password = filter_data($_POST['password']);
         $password_confirm = filter_data($_POST['password_confirm']);
+        $email = filter_data($_POST['email']);
         $plz = filter_data($_POST['plz']);
         $ort = filter_data($_POST['ort']);
-        $ga = filter_data($_POST['ga']);
 
-      if($password == $password_confirm){
-        if(register($username, $email, $password, $plz, $ort, $ga)){
+      if($password == $confirm_password){
+        // register liefert bei erfolgreichem Eintrag in die DB den Wert TRUE zurück, andernfalls FALSE
+        $result = register($username, $password, $email, $plz, $ort);
+        if($result){
           $success = true;
-          $success_msg .= "Sie haben sich erfolgreich registriert.<br/>";
-          $success_msg .= "Bitte loggen Sie sich jetzt ein.<br/>";
+          $success_msg = "Sie haben erfolgreich registriert.</br>
+          Bitte loggen Sie sich jetzt ein.</br>";
         }else{
           $error = true;
-          $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.";
+          $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.</br>";
         }
       }else{
         $error = true;
-        $error_msg .= "Bitte überprüfen Sie die Passworteingabe.<br/>";
+        $error_msg .= "Die Passwörter stimmen nicht überein.</br>";
       }
-    }else {
+    }else{
       $error = true;
-      $error_msg .= "Bitte füllen Sie alle Felder aus.<br/>";
+      $error_msg .= "Bitte füllen Sie alle Felder aus.</br>";
     }
   }
 
@@ -201,7 +202,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="password_confirm" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
+                                        <input type="password" name="password_confirm" id="password_confirm" tabindex="2" class="form-control" placeholder="Passwort bestätigen">
                                     </div>
 
                                     <div class="form-group">
@@ -216,19 +217,7 @@
                                             <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
                                         </div>
 
-                                                                            <div class="form-group" id="ga">
-                                        Hast du ein GA?
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="ga_yes" id="ga_yes">ja</label>
-                                        </div>
-
-                                        <div class="radio">
-                                            <label><input type="radio" name="ga_no" id="ga_no">nein</label>
-                                        </div>
-                                    </div>
-
-
+                                                                                                                   
 
                                     </div>
 
@@ -246,6 +235,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div><script type="text/javascript">
 $(function() {
 
@@ -266,7 +256,28 @@ $(function() {
 
                 });
             </script> <!--- Login Formular =-->
+            
+            <?php 
+    // Gibt es einen Erfolg zu vermelden?
+    if($success == true){
+  ?>
+      <div class="alert alert-success" role="alert"><?php echo $success_msg; ?></div>
+  <?php 
+    }   // schliessen von if($success == true)
+    // Gibt es einen Fehler?
+    if($error == true){ 
+  ?>
+      <div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
+  <?php
+    }   // schliessen von if($success == true)
+  ?>
+
+            
+            
         </div>
-    </div><?php include ("footer.php"); ?>
+    </div>
+    
+    
+    <?php include ("footer.php"); ?>
 </body>
 </html>
