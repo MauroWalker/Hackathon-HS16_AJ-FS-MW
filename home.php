@@ -1,6 +1,22 @@
 <?php include ("header.php"); ?>
 
-<!DOCTYPE html>
+<?php
+  session_start();
+	if(!isset($_SESSION['user_ID'])){
+		header("Location:index.php");
+	}else{
+  	$user_id = $_SESSION['user_ID'];
+	}
+
+	require_once("system/data.php");
+	require_once("system/security.php");
+	
+	
+	$post_list = get_reisen($user_ID);
+?>
+<!--- oberer Teil immer einfügen ganz oben --->	
+	
+
 <html lang="en">
 <head>
   <title>Hackathon HS16 - Bock auf Reisen</title>
@@ -54,6 +70,38 @@
     </div>
 
     <div class="col-sm-8 text-left">
+
+
+
+
+        <!-- Beitrag -->
+        <?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
+          <div class="row">
+
+            <form enctype="multipart/form-data" class="form-inline" method="post" action="<?PHP echo $_SERVER['PHP_SELF'] ?>">
+              <div class="col-xs-10">
+                <div class="panel panel-default p42panel">
+                  <div class="panel-heading">
+
+                    <h3 class="panel-title"><?php echo $post['Reiseziel']; ?></h3>
+                  </div>
+                  <div class="panel-body">
+                    <p><?php echo $post['Beschreibung']; ?></p>
+
+<?php if($post['Bildquelle'] != NULL){  ?>
+                    <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
+<?php } ?>
+                  </div>
+                  <div class="panel-footer text-right">
+                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
+                  </div>
+                </div>
+              </div><!-- /col-sm-10 -->
+            </form>
+          </div> <!-- /Beitrag -->
+
+
+
 
 
 

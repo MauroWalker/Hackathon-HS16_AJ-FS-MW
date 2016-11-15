@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if(isset($_SESSION['id'])) unset($_SESSION['id']);
+  if(isset($_SESSION['id'])) unset($_SESSION['user_ID']);
   session_destroy();
 
   require_once('system/data.php');
@@ -23,7 +23,7 @@
       if( $row_count == 1){
         session_start();
         $username = mysqli_fetch_assoc($result);
-        $_SESSION['userid'] = $username['user_id'];
+        $_SESSION['user_ID'] = $username['user_ID'];
         header("Location:home.php");
       }else{
         // Fehlermeldungen werden erst später angezeigt
@@ -127,13 +127,6 @@
             </div>
 
             <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
-                </ul>
             </div>
         </div>
     </nav>

@@ -31,7 +31,14 @@
     $sql = "INSERT INTO Users (username, password, email, plz, ort) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
-
+	/* *********************************************************
+	/* home.php
+	/* ****************************************************** */
+	
+	function get_reisen($user_ID){
+    $sql = "SELECT * FROM Reisen";
+		return get_result($sql);
+	}
 
 
 ?>
