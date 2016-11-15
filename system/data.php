@@ -35,7 +35,7 @@
 	/* home.php
 	/* ****************************************************** */
 	
-	function get_reisen($user_ID){
+	function get_reisen(){
     $sql = "SELECT * FROM Reisen";
 		return get_result($sql);
 	}

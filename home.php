@@ -12,7 +12,7 @@
 	require_once("system/security.php");
 	
 	
-	$post_list = get_reisen($user_ID);
+	$post_list = get_reisen();
 ?>
 <!--- oberer Teil immer einfügen ganz oben --->	
 	
@@ -86,11 +86,13 @@
                     <h3 class="panel-title"><?php echo $post['Reiseziel']; ?></h3>
                   </div>
                   <div class="panel-body">
-                    <p><?php echo $post['Beschreibung']; ?></p>
-
-<?php if($post['Bildquelle'] != NULL){  ?>
+	                  <?php if($post['Bildquelle'] != NULL){  ?>
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
 <?php } ?>
+	                  
+                    <p><?php echo $post['Beschreibung']; ?></p>
+
+
                   </div>
                   <div class="panel-footer text-right">
                     <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
@@ -99,7 +101,7 @@
               </div><!-- /col-sm-10 -->
             </form>
           </div> <!-- /Beitrag -->
-
+<?php   } ?>
 
 
 
