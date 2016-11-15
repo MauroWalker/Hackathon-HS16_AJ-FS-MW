@@ -89,7 +89,7 @@
 	                  <?php if($post['Bildquelle'] != NULL){  ?>
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
 <?php } ?>
-	                  
+	                  1
                     <p><?php echo $post['Beschreibung']; ?></p>
 
 
