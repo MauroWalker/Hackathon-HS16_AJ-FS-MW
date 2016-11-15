@@ -28,7 +28,7 @@
 	}
 
 	function register($username , $password, $email, $plz, $ort){
-    $sql = "INSERT INTO Users (username, password, email, plz, ort, ga) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
+    $sql = "INSERT INTO Users (username, password, email, plz, ort) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
 

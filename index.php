@@ -45,7 +45,7 @@
         $plz = filter_data($_POST['plz']);
         $ort = filter_data($_POST['ort']);
 
-      if($password == $confirm_password){
+      if($password == $password_confirm){
         // register liefert bei erfolgreichem Eintrag in die DB den Wert TRUE zurück, andernfalls FALSE
         $result = register($username, $password, $email, $plz, $ort);
         if($result){
