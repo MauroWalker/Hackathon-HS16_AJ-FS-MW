@@ -26,6 +26,14 @@
     <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<link href="themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+<script src="js/star-rating.js" type="text/javascript"></script>
+  
+  <script>
+	  $("#input-id").rating({min:1, max:10, step:1, size:'xs'});
+	  </script>
+
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -95,8 +103,17 @@
 
                   </div>
                   <div class="panel-footer text-right">
-                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
-                  </div>
+                    
+
+<label for="input-1" class="control-label">Reise bewerten:</label>
+<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="1" data-size="xs">
+
+
+
+                    
+                    
+                    
+                                      </div>
                 </div>
               </div><!-- /col-sm-10 -->
             </form>

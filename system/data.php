@@ -1,5 +1,4 @@
 <?php
-
 	function get_db_connection()
 	{
     $db = mysqli_connect('localhost', '260978_3_1', 'gQZTGEbRdq8s', '260978_3_1')
@@ -27,11 +26,18 @@
 		$sql = "SELECT * FROM Users WHERE username = '".$username."' AND password = '".$password."';";
 		return get_result($sql);
 	}
+	?>	
 
-	function register($username , $password, $email, $plz, $ort){
+
+<?php
+	function register($username, $password, $email, $plz, $ort){
     $sql = "INSERT INTO Users (username, password, email, plz, ort) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
+	
+	?>
+	
+	<?php
 	/* *********************************************************
 	/* home.php
 	/* ****************************************************** */
@@ -40,6 +46,5 @@
     $sql = "SELECT * FROM Reisen";
 		return get_result($sql);
 	}
-
 
 ?>
