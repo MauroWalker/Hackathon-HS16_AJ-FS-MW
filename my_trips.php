@@ -1,3 +1,5 @@
+<?php include ("header.php"); ?>
+
 <?php
   session_start();
 	if(!isset($_SESSION['user_ID'])){
@@ -9,26 +11,11 @@
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-if(isset($_POST['comment-submit'])){
-  $users_comment = $_POST['comment'];
-  $users_name = $_POST['name'];
-  $reise_id = $_POST['articleid'];
 
-  // $users_comment = mysql_real_escape_string($users_comment);
-  // $users_name = mysql_real_escape_string($users_name);
-
-  write_comment($users_comment, $users_name, $reise_id);
-
-
-}
-
-
-	$post_list = get_reisen();
+	$post_list = get__meine_reisen();
 ?>
 <!--- oberer Teil immer einfügen ganz oben --->
-
-<!--- Kommentieren --->
-
+	
 
 <html lang="en">
 <head>
@@ -39,8 +26,6 @@ if(isset($_POST['comment-submit'])){
     <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -75,11 +60,9 @@ if(isset($_POST['comment-submit'])){
     }
   </style>
 </head>
-
-
-
 <body>
-<?php include ("header.php"); ?>
+
+
 
 <div class="container-fluid text-center">
   <div class="row content">
@@ -112,45 +95,19 @@ if(isset($_POST['comment-submit'])){
 
                   </div>
                   <div class="panel-footer text-right">
-                    
-
-<form action="reise_like">
-<button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-thumbs-up" href="" aria-hidden="true"></span>
-</button>
-</form>
-
-<script>
-	
-$("reise_like").click(function(){
-	 $.get('data.php', reise_like(+1);
-	}
-</script>
-
-
-
-<br>Anzahl Likes: <?php echo $post['Likes']; ?>
-                    
-                    
-                    
-                                      </div>
+                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
+                  </div>
                 </div>
               </div><!-- /col-sm-10 -->
             </form>
-              <div class="col-xs-10">
-                <form method='post'>
-                  <label for="name">Name:</label>
-                    <input type='text' name='name' id='name' value="hier muss ein Name stehen"/><br />
-
-                  <label for="comment">Kommentar:</label>
-                    <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
-
-                  <input type='hidden' name='articleid' id='articleid' value='<?php echo $post['Reise_ID']; ?>' />
-
-                  <input type='submit' name="comment-submit" value='Submit' />
-                </form>              </div>
           </div> <!-- /Beitrag -->
 <?php   } ?>
+
+
+
+
+
+
 
 
     </div>
@@ -164,7 +121,6 @@ $("reise_like").click(function(){
     </div>
   </div>
 </div>
-
 
 <?php include ("footer.php"); ?>
 
