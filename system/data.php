@@ -35,11 +35,20 @@
 	/* *********************************************************
 	/* home.php
 	/* ****************************************************** */
-	
+
 	function get_reisen(){
     $sql = "SELECT * FROM Reisen";
 		return get_result($sql);
 	}
+
+	function write_comment($users_comment, $users_name, $reise_id){
+		$query = "INSERT INTO Kommentare (Kommentar, Name, reise_id) VALUES ('$users_comment', '$users_name', $reise_id);";
+	  return get_result($query);
+	}
+//	function comment($posttext, $owner, $image){
+//    $sql = "INSERT INTO Kommentare (Kommentar, Zeit) VALUES ('$posttext', '$owner');";
+//		return get_result($sql);
+//	}
 
 
 ?>

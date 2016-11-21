@@ -1,5 +1,3 @@
-<?php include ("header.php"); ?>
-
 <?php
   session_start();
 	if(!isset($_SESSION['user_ID'])){
@@ -10,12 +8,27 @@
 
 	require_once("system/data.php");
 	require_once("system/security.php");
-	
-	
+
+if(isset($_POST['comment-submit'])){
+  $users_comment = $_POST['comment'];
+  $users_name = $_POST['name'];
+  $reise_id = $_POST['articleid'];
+
+  // $users_comment = mysql_real_escape_string($users_comment);
+  // $users_name = mysql_real_escape_string($users_name);
+
+  write_comment($users_comment, $users_name, $reise_id);
+
+
+}
+
+
 	$post_list = get_reisen();
 ?>
-<!--- oberer Teil immer einfügen ganz oben --->	
-	
+<!--- oberer Teil immer einfügen ganz oben --->
+
+<!--- Kommentieren --->
+
 
 <html lang="en">
 <head>
@@ -60,9 +73,11 @@
     }
   </style>
 </head>
+
+
+
 <body>
-
-
+<?php include ("header.php"); ?>
 
 <div class="container-fluid text-center">
   <div class="row content">
@@ -100,14 +115,20 @@
                 </div>
               </div><!-- /col-sm-10 -->
             </form>
+              <div class="col-xs-10">
+                <form method='post'>
+                  <label for="name">Name:</label>
+                    <input type='text' name='name' id='name' value="hier muss ein Name stehen"/><br />
+
+                  <label for="comment">Kommentar:</label>
+                    <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
+
+                  <input type='hidden' name='articleid' id='articleid' value='<?php echo $post['Reise_ID']; ?>' />
+
+                  <input type='submit' name="comment-submit" value='Submit' />
+                </form>              </div>
           </div> <!-- /Beitrag -->
 <?php   } ?>
-
-
-
-
-
-
 
 
     </div>
@@ -121,6 +142,7 @@
     </div>
   </div>
 </div>
+
 
 <?php include ("footer.php"); ?>
 
