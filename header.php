@@ -58,7 +58,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="home.php">Home</a></li>
         <li><a href="my_trips.php">Meine Reisen</a></li>
-        <li><a href="">Profil</a></li>
+        <li><a data-toggle="modal" data-target="#myModal">Profil</a></li>
         <li><a href="">Kontakt</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
