@@ -26,7 +26,7 @@
 		$sql = "SELECT * FROM Users WHERE username = '".$username."' AND password = '".$password."';";
 		return get_result($sql);
 	}
-	?>	
+	?>
 
 
 <?php
@@ -34,23 +34,29 @@
     $sql = "INSERT INTO Users (username, password, email, plz, ort) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
-	
+
 	?>
-	
+
 	<?php
 	/* *********************************************************
 	/* home.php
 	/* ****************************************************** */
-	
+
 	function get_reisen(){
     $sql = "SELECT * FROM Reisen";
 		return get_result($sql);
 	}
-	
+
 	function reise_like(){
 	    $sql = "INSERT INTO Reisen (Likes, Geliked_Von) VALUES ('+1', '$username');";
 	    echo "hallo";
-		return get_result($sql);	
+		return get_result($sql);
 	}
+
+	function get_meine_reisen($user_ID){
+    $sql = "SELECT * FROM Reisen r, Users u WHERE r.user_ID = '$user_ID' ORDER BY r.Likes;";
+		return get_result($sql);
+	}
+
 
 ?>
