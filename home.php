@@ -284,16 +284,30 @@ if(isset($_POST['comment-submit'])){
                 <div class="panel panel-default p42panel">
                   <div class="panel-heading">
 
-                    <h3 class="panel-title"><?php echo $post['Reiseziel']; ?></h3>
-                  </div>
+                    <span class="panel-title"><b><?php echo $post['Reiseziel']; ?></b></span>
+                  Reise ID: <?php echo $post['Reise_ID']; ?>, Erfasst von: <?php echo $post['Verfasser']; ?></div>
                   <div class="panel-body">
 	                  <?php if($post['Bildquelle'] != NULL){  ?>
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
 <?php } ?>
-	                  <b>Beschreibung:</b>
+					<br></br>
+	                <b>Beschreibung:</b>
                     <p><?php echo $post['Beschreibung']; ?></p>
-
-
+					<b>Dauer:</b>
+					<p><?php echo $post['Dauer']; ?></p>
+					<b>Kosten:</b>
+					<p><?php echo $post['Kosten']; ?></p>
+					<b>PLZ/Ort:</b>
+					<p><?php echo $post['PLZ']; ?>/<?php echo $post['Ort']; ?></p>
+					<b>GA Benötigt:</b>
+					<p><?php echo $post['GA_benötigt']; ?></p>	
+					<b>Region:</b>
+					<p><?php echo $post['Region']; ?></p>
+					<b>Kategorie:</b>
+					<p><?php echo $post['Kategorie']; ?></p>						
+					
+					
+									
                   </div>
                   <div class="panel-footer text-right">
                     
