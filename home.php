@@ -3,7 +3,7 @@
 	if(!isset($_SESSION['user_ID'])){
 		header("Location:index.php");
 	}else{
-  	$user_id = $_SESSION['user_ID'];
+  	$user_ID = $_SESSION['user_ID'];
 	}
 
 	require_once("system/data.php");
@@ -26,11 +26,20 @@ if(isset($_POST['comment-submit'])){
 	$post_list = get_reisen();
 	
 /* Profileinstellungen */
+
+	// Abfrage der Userdaten
+	$result = get_user($user_ID);
+	$user = mysqli_fetch_assoc($result);
+
 	if(isset($_POST['update-submit'])){
     $email = filter_data($_POST['email']);
     $password = filter_data($_POST['password']);
     $confirm_password = filter_data($_POST['confirm_password']);
-    $username = filter_data($_POST['username']);	
+    $username = filter_data($_POST['username']);
+    
+    $result = update_user($user_ID, $email, $password, $confirm_password, $username);
+  }
+    	
 /* Profileinstellungen */	
 	
 	
@@ -131,12 +140,6 @@ if(isset($_POST['comment-submit'])){
 </button>
 </form>
 
-<script>
-	
-$("reise_like").click(function(){
-	 $.get('data.php', reise_like(+1);
-	}
-</script>
 
 
 
@@ -190,7 +193,7 @@ $("reise_like").click(function(){
     <div class="modal-content">
       <form enctype="multipart/form-data" action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
         <div class="modal-header">
-          <h4 class="modal-title" id="myModalLabel">Profileinstellungen der UserID#<?PHP echo $user_id?></h4>
+          <h4 class="modal-title" id="myModalLabel">Profileinstellungen der UserID#<?PHP echo $user_ID?></h4>
         </div>
         <div class="modal-body">
 	        
@@ -198,8 +201,8 @@ $("reise_like").click(function(){
             <label for="Username" class="col-sm-2 col-xs-12 form-control-label">Username</label>
             <div class="col-sm-5 col-xs-6">
               <input  type="text" class="form-control form-control-sm"
-                      id="Vorname" placeholder="Vorname"
-                      name="firstname" value="<?php echo $user['username']; ?>">
+                      id="username" placeholder="Username"
+                      name="username" value="<?php echo $user['username']; ?>">
             </div>
           </div>
           <div class="form-group row">
