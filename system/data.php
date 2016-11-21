@@ -59,7 +59,7 @@
 		return get_result($sql);
 	}
 
-  function update_user($user_ID, $email, $password, $confirm_password, $username){
+  function update_user($user_ID, $email, $password, $confirm_password, $username, $plz, $ort){
   	$sql_ok = false;
   	$sql = "UPDATE Users SET ";
   	if($email != ""){
@@ -72,6 +72,14 @@
     }
     if($username != ""){
       $sql .= "username = '$username', ";
+  		$sql_ok = true;
+    }
+    if($ort != ""){
+      $sql .= "ort = '$ort', ";
+  		$sql_ok = true;
+    }
+    if($plz != ""){
+      $sql .= "plz = '$plz', ";
   		$sql_ok = true;
     }
     // Das Komma an der vorletzten Position des $sql-Strings durch ein Leerzeichen ersetzen
