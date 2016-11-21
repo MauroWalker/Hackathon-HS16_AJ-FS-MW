@@ -24,16 +24,22 @@ if(isset($_POST['comment-submit'])){
 
 
 	$post_list = get_reisen();
-	
+
+  $loginname_result = get_username($user_id);
+  $loginname = mysqli_fetch_assoc($loginname_result);
+
+  $comment_list = get_comment();
+
+
 /* Profileinstellungen */
 	if(isset($_POST['update-submit'])){
     $email = filter_data($_POST['email']);
     $password = filter_data($_POST['password']);
     $confirm_password = filter_data($_POST['confirm_password']);
-    $username = filter_data($_POST['usename']);	
-/* Profileinstellungen */	
-	
-	
+    $username = filter_data($_POST['usename']);
+/* Profileinstellungen */
+
+  }
 ?>
 <!--- oberer Teil immer einfügen ganz oben --->
 
@@ -49,7 +55,7 @@ if(isset($_POST['comment-submit'])){
     <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -122,7 +128,7 @@ if(isset($_POST['comment-submit'])){
 
                   </div>
                   <div class="panel-footer text-right">
-                    
+
 
 <form action="reise_like">
 <button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
@@ -131,7 +137,7 @@ if(isset($_POST['comment-submit'])){
 </form>
 
 <script>
-	
+
 $("reise_like").click(function(){
 	 $.get('data.php', reise_like(+1);
 	}
@@ -140,17 +146,33 @@ $("reise_like").click(function(){
 
 
 <br>Anzahl Likes: <?php echo $post['Likes']; ?>
-                    
-                    
-                    
+
                                       </div>
                 </div>
               </div><!-- /col-sm-10 -->
             </form>
+
+
+            <?php
+            $comments_result = get_comment_reise($post['Reise_ID']);
+            while($comment = mysqli_fetch_assoc($comments_result)) { ?>
+
+            <div class="col-xs-10">
+              <form method='post'>
+                <label for="name">
+                  <?php echo $comment['Kommentar']; ?>
+                </label>
+              </form>
+            </div>
+
+            <?php } ?>
+
+
+
               <div class="col-xs-10">
                 <form method='post'>
-                  <label for="name">Name:</label>
-                    <input type='text' name='name' id='name' value="hier muss ein Name stehen"/><br />
+                  <label for="name">Hallo <?php echo $loginname['username'] ?>, kommentiere doch diese Reise!</label>
+                    <input type='hidden' name='name' id='name' value="<?php echo $_SESSION['user_ID']; ?>"/><br />
 
                   <label for="comment">Kommentar:</label>
                     <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
@@ -159,7 +181,7 @@ $("reise_like").click(function(){
 
                   <input type='submit' name="comment-submit" value='Submit' />
                 </form>              </div>
-          </div> <!-- /Beitrag -->
+                </div> <!-- /Beitrag -->
 <?php   } ?>
 
 
@@ -173,16 +195,8 @@ $("reise_like").click(function(){
       </div>
     </div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -192,7 +206,7 @@ $("reise_like").click(function(){
           <h4 class="modal-title" id="myModalLabel">Profileinstellungen der UserID#<?PHP echo $user_id?></h4>
         </div>
         <div class="modal-body">
-	        
+
           <div class="form-group row">
             <label for="Username" class="col-sm-2 col-xs-12 form-control-label">Username</label>
             <div class="col-sm-5 col-xs-6">
@@ -230,36 +244,6 @@ $("reise_like").click(function(){
 
     </div>
   </div>
-</div>  
-<!-- Modal -->  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-</div>
-
-
+</body>
 <?php include ("footer.php"); ?>
-
 </html>

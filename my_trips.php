@@ -15,7 +15,7 @@
 	$post_list = get__meine_reisen();
 ?>
 <!--- oberer Teil immer einfügen ganz oben --->
-	
+
 
 <html lang="en">
 <head>

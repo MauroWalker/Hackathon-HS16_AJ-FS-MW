@@ -210,7 +210,7 @@
                                             <input type="text" name="ort" id="ort" tabindex="2" class="form-control" placeholder="Ort">
                                         </div>
 
-                                                                                                                   
+
 
                                     </div>
 
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div><script type="text/javascript">
 $(function() {
 
@@ -249,28 +249,28 @@ $(function() {
 
                 });
             </script> <!--- Login Formular =-->
-            
-            <?php 
+
+            <?php
     // Gibt es einen Erfolg zu vermelden?
     if($success == true){
   ?>
       <div class="alert alert-success" role="alert"><?php echo $success_msg; ?></div>
-  <?php 
+  <?php
     }   // schliessen von if($success == true)
     // Gibt es einen Fehler?
-    if($error == true){ 
+    if($error == true){
   ?>
       <div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
   <?php
     }   // schliessen von if($success == true)
   ?>
 
-            
-            
+
+
         </div>
     </div>
-    
-    
+
+
     <?php include ("footer.php"); ?>
 </body>
 </html>
