@@ -124,13 +124,17 @@ if(isset($_POST['comment-submit'])){
     <div class="col-sm-8 text-left">
 
 	
-	<div class="row content">
+	<div>
 
 <div>
     <h5>Minimale Reisedistanz</h5>
-    <input type="range" value="0" data-rangeSlider>
-    <output></output> km
+    <input type="range" value="0" max="450" step="10" data-rangeSlider>
+    <output>km</output>
+    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren"> 
 </div>
+
+<br>
+<br>
 
 <script>
     (function () {
@@ -142,7 +146,7 @@ if(isset($_POST['comment-submit'])){
         function valueOutput(element) {
             var value = element.value,
                     output = element.parentNode.getElementsByTagName('output')[0];
-            output.innerHTML = value;
+            output.innerHTML = value + " km";
         }
 
         for (var i = elements.length - 1; i >= 0; i--) {
@@ -251,6 +255,10 @@ if(isset($_POST['comment-submit'])){
 
 	
 	</div>
+	
+	
+	
+	
 
 
         <!-- Beitrag -->
@@ -268,7 +276,7 @@ if(isset($_POST['comment-submit'])){
 	                  <?php if($post['Bildquelle'] != NULL){  ?>
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
 <?php } ?>
-	                  1
+	                  <b>Beschreibung:</b>
                     <p><?php echo $post['Beschreibung']; ?></p>
 
 
