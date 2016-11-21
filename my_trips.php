@@ -1,4 +1,3 @@
-<?php include ("header.php"); ?>
 
 <?php
   session_start();
@@ -64,6 +63,7 @@
   </style>
 </head>
 <body>
+  <?php include ("header.php"); ?>
 
 
 <div class="container-fluid text-center">
@@ -92,6 +92,7 @@
                   <button type="submit" class="close" name="delete_reise" value="<?php echo $post['Reise_ID']; ?>">
                     <span aria-hidden="true">Reise Löschen</span>
                   </button>
+
 
                 </div>
 

@@ -41,6 +41,11 @@
 		return get_result($sql);
 	}
 
+	function get_username($user_id){
+    $sql = "SELECT username FROM Users WHERE user_ID = '".$user_id."'";
+		return get_result($sql);
+	}
+
 	function write_comment($users_comment, $users_name, $reise_id){
 		$query = "INSERT INTO Kommentare (Kommentar, Name, reise_id) VALUES ('$users_comment', '$users_name', $reise_id);";
 	  return get_result($query);
@@ -59,7 +64,7 @@
 		return get_result($sql);
 	}
 
-  function update_user($user_ID, $email, $password, $confirm_password, $username, $plz, $ort){
+  function update_user($user_ID, $email, $password, $confirm_password, $username){
   	$sql_ok = false;
   	$sql = "UPDATE Users SET ";
   	if($email != ""){
@@ -74,14 +79,6 @@
       $sql .= "username = '$username', ";
   		$sql_ok = true;
     }
-    if($ort != ""){
-      $sql .= "ort = '$ort', ";
-  		$sql_ok = true;
-    }
-    if($plz != ""){
-      $sql .= "plz = '$plz', ";
-  		$sql_ok = true;
-    }
     // Das Komma an der vorletzten Position des $sql-Strings durch ein Leerzeichen ersetzen
     $sql = substr_replace($sql, ' ', -2, 1);
 
@@ -94,6 +91,18 @@
   		return false;
   	}
   }
+
+	function get_meine_reisen($user_ID){
+		$sql = "SELECT * FROM Reisen r LEFT JOIN Users u USING(user_ID) WHERE r.user_ID = '$user_ID' ORDER BY r.Likes;";
+		return get_result($sql);
+	}
+
+	function delete_reise($Reise_ID){
+		$sql = "DELETE FROM Reisen WHERE Reise_ID = '$Reise_ID'";
+		print ($sql);
+		return get_result($sql);
+
+	}
 
 
 ?>
