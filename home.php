@@ -1,5 +1,5 @@
 <?php
-  session_start();
+   session_start();
 	if(!isset($_SESSION['user_ID'])){
 		header("Location:index.php");
 	}else{
@@ -30,6 +30,7 @@ if(isset($_POST['comment-submit'])){
 	// Abfrage der Userdaten
 	$result = get_user($user_ID);
 	$user = mysqli_fetch_assoc($result);
+	
 
 	if(isset($_POST['update-submit'])){
     $email = filter_data($_POST['email']);
@@ -119,6 +120,8 @@ if(isset($_POST['comment-submit'])){
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav hidden-xs">
+	  <br>Eingeloggt als: </br>
+
     </div>
 
     <div class="col-sm-8 text-left">

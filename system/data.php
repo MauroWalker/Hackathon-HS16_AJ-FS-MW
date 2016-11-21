@@ -41,17 +41,10 @@
 		return get_result($sql);
 	}
 
-	function get_username($user_id){
-    $sql = "SELECT username FROM Users WHERE user_ID = '".$user_id."'";
-		return get_result($sql);
-	}
-
 	function write_comment($users_comment, $users_name, $reise_id){
 		$query = "INSERT INTO Kommentare (Kommentar, Name, reise_id) VALUES ('$users_comment', '$users_name', $reise_id);";
 	  return get_result($query);
 	}
-<<<<<<< HEAD
-=======
 //	function comment($posttext, $owner, $image){
 //    $sql = "INSERT INTO Kommentare (Kommentar, Zeit) VALUES ('$posttext', '$owner');";
 //		return get_result($sql);
@@ -93,15 +86,6 @@
   		return false;
   	}
   }
-	
-	function get_meine_reisen($user_ID){
-		$sql = "SELECT * FROM Reisen r, Users u WHERE r.user_ID = '$user_ID' ORDER BY r.Likes;";
-		return get_result($sql);
-	}
 
-	function delete_reise($Reise_ID){
-		$sql = "DELETE FROM Reisen WHERE Reise_ID = $Reise_ID;";
-		return get_result($sql);
-	}
 
 ?>
