@@ -103,5 +103,15 @@
 
 	}
 
+	function get_comment(){
+		$sql = "SELECT * FROM Kommentare";
+		return get_result($sql);
+	}
+
+	function get_comment_reise($reise_id){
+		$sql = "SELECT Kommentar FROM Kommentare WHERE reise_ID = '".$reise_id."'";
+		return get_result($sql);
+	}
+
 
 ?>

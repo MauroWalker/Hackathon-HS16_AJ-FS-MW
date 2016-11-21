@@ -24,13 +24,19 @@ if(isset($_POST['comment-submit'])){
 
 
 	$post_list = get_reisen();
-	
+
+  $loginname_result = get_username($user_ID);
+  $loginname = mysqli_fetch_assoc($loginname_result);
+
+  $comment_list = get_comment();
+
+
 /* Profileinstellungen */
 
 	// Abfrage der Userdaten
 	$result = get_user($user_ID);
 	$user = mysqli_fetch_assoc($result);
-	
+
 
 	if(isset($_POST['update-submit'])){
     $email = filter_data($_POST['email']);
@@ -39,13 +45,13 @@ if(isset($_POST['comment-submit'])){
     $username = filter_data($_POST['username']);
     $plz = filter_data($_POST['ort']);
     $ort = filter_data($_POST['plz']);
-    
+
     $result = update_user($user_ID, $email, $password, $confirm_password, $username, $plz, $ort);
   }
-    	
-/* Profileinstellungen */	
-	
-	
+
+/* Profileinstellungen */
+
+
 ?>
 <!--- oberer Teil immer einfügen ganz oben --->
 
@@ -64,8 +70,8 @@ if(isset($_POST['comment-submit'])){
   <script src="rangeSlider.js"></script>
   <link rel="stylesheet" href="rangeSlider.css">
 
-  
-  
+
+
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -106,10 +112,10 @@ if(isset($_POST['comment-submit'])){
             text-align: center;
             margin: 30px 0;
             width: 100%;
-        }   
+        }
         h5 {
 	    text-align: center;
-        } 
+        }
   </style>
 </head>
 
@@ -123,7 +129,7 @@ if(isset($_POST['comment-submit'])){
   <div class="row content">
     <div class="col-sm-2 sidenav hidden-xs">
 	  <br>Eingeloggt als: </br>
-	  
+
 	  <b>
 	  <?php
 	  echo $user['username'];
@@ -137,14 +143,14 @@ if(isset($_POST['comment-submit'])){
 
     <div class="col-sm-8 text-left">
 
-	
+
 	<div>
 
 <div>
     <h5>Minimale Reisedistanz</h5>
     <input type="range" value="0" max="450" step="10" data-rangeSlider>
     <output>km</output>
-    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren"> 
+    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
 </div>
 
 <br>
@@ -267,12 +273,12 @@ if(isset($_POST['comment-submit'])){
 </script>
 
 
-	
+
 	</div>
-	
-	
-	
-	
+
+
+
+
 
 
         <!-- Beitrag -->
@@ -296,7 +302,7 @@ if(isset($_POST['comment-submit'])){
 
                   </div>
                   <div class="panel-footer text-right">
-                    
+
 
 <form action="reise_like">
 <button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
@@ -308,17 +314,35 @@ if(isset($_POST['comment-submit'])){
 
 
 <br>Anzahl Likes: <?php echo $post['Likes']; ?>
-                    
-                    
-                    
+
+
+
                                       </div>
                 </div>
               </div><!-- /col-sm-10 -->
             </form>
+            <!--- Kommentare --->
+
+            <?php
+            $comments_result = get_comment_reise($post['Reise_ID']);
+            while($comment = mysqli_fetch_assoc($comments_result)) { ?>
+
+            <div class="col-xs-10">
+              <form method='post'>
+                <label for="name">
+                  <?php echo $comment['Kommentar']; ?>
+                </label>
+              </form>
+            </div>
+
+            <?php } ?>
+
+
+
               <div class="col-xs-10">
                 <form method='post'>
-                  <label for="name">Name:</label>
-                    <input type='text' name='name' id='name' value="hier muss ein Name stehen"/><br />
+                  <label for="name">Hallo <?php echo $loginname['username'] ?>, kommentiere doch diese Reise!</label>
+                    <input type='hidden' name='name' id='name' value="<?php echo $_SESSION['user_ID']; ?>"/><br />
 
                   <label for="comment">Kommentar:</label>
                     <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
@@ -327,8 +351,9 @@ if(isset($_POST['comment-submit'])){
 
                   <input type='submit' name="comment-submit" value='Submit' />
                 </form>              </div>
-          </div> <!-- /Beitrag -->
+                </div> <!-- /Beitrag -->
 <?php   } ?>
+
 
 
     </div>
@@ -341,16 +366,16 @@ if(isset($_POST['comment-submit'])){
       </div>
     </div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -360,7 +385,7 @@ if(isset($_POST['comment-submit'])){
           <h4 class="modal-title" id="myModalLabel">Profileinstellungen der UserID#<?PHP echo $user_ID?></h4>
         </div>
         <div class="modal-body">
-	        
+
           <div class="form-group row">
             <label for="Username" class="col-sm-2 col-xs-12 form-control-label">Username</label>
             <div class="col-sm-5 col-xs-6">
@@ -389,8 +414,8 @@ if(isset($_POST['comment-submit'])){
               <input type="password" class="form-control form-control-sm" id="Passwort_Conf" placeholder="Passwort" name="confirm_password">
             </div>
           </div>
-        
-        
+
+
                   <div class="form-group row">
             <label for="Passwort_Conf" class="col-sm-2 form-control-label">PLZ</label>
             <div class="col-sm-10">
@@ -398,16 +423,16 @@ if(isset($_POST['comment-submit'])){
             </div>
           </div>
         </div>
-        
+
                   <div class="form-group row">
             <label for="Passwort_Conf" class="col-sm-2 form-control-label">Ort</label>
             <div class="col-sm-10">
               <input type="text" class="form-control form-control-sm" id="ort1" placeholder="Ort" name="ort" value="<?php echo $user['ort']; ?>"
             </div>
           </div>
-        
-        
-        
+
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
@@ -417,33 +442,33 @@ if(isset($_POST['comment-submit'])){
 </div>
     </div>
   </div>
-</div>  
-<!-- Modal -->  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+</div>
+<!-- Modal -->
 
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 <?php include ("footer.php"); ?>
