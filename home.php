@@ -30,7 +30,7 @@ if(isset($_POST['comment-submit'])){
     $email = filter_data($_POST['email']);
     $password = filter_data($_POST['password']);
     $confirm_password = filter_data($_POST['confirm_password']);
-    $username = filter_data($_POST['usename']);	
+    $username = filter_data($_POST['username']);	
 /* Profileinstellungen */	
 	
 	
@@ -89,6 +89,7 @@ if(isset($_POST['comment-submit'])){
 
 
 <body>
+
 <?php include ("header.php"); ?>
 
 <div class="container-fluid text-center">
@@ -252,14 +253,16 @@ $("reise_like").click(function(){
   
   
   
-  
+
   
   
   
   
 </div>
 
-
 <?php include ("footer.php"); ?>
+
+</body>
+
 
 </html>
