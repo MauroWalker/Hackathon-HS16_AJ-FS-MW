@@ -103,7 +103,7 @@
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #F04DFF;
+      background-color: #555;
       color: white;
       padding: 15px;
     }
@@ -115,9 +115,6 @@
         padding: 15px;
       }
       .row.content {height:auto;}
-    }
-    .navbar-brand {
-	    color: #F04DFF;
     }
     </style>
 </head>
