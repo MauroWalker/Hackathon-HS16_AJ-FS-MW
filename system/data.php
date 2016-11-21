@@ -50,6 +50,50 @@
 		$query = "INSERT INTO Kommentare (Kommentar, Name, reise_id) VALUES ('$users_comment', '$users_name', $reise_id);";
 	  return get_result($query);
 	}
+<<<<<<< HEAD
+=======
+//	function comment($posttext, $owner, $image){
+//    $sql = "INSERT INTO Kommentare (Kommentar, Zeit) VALUES ('$posttext', '$owner');";
+//		return get_result($sql);
+//	}
+
+	/* *********************************************************
+	/* Einstellungen
+	/* ****************************************************** */
+
+	function get_user($user_ID){
+    $sql = "SELECT * FROM Users WHERE user_ID = $user_ID;";
+		return get_result($sql);
+	}
+
+  function update_user($user_ID, $email, $password, $confirm_password, $username){
+  	$sql_ok = false;
+  	$sql = "UPDATE Users SET ";
+  	if($email != ""){
+  		$sql .= "email = '$email', ";
+  		$sql_ok = true;
+    }
+    if($password != "" && $password == $confirm_password) {
+      $sql .= "password = '$password', ";
+  		$sql_ok = true;
+    }
+    if($username != ""){
+      $sql .= "username = '$username', ";
+  		$sql_ok = true;
+    }
+    // Das Komma an der vorletzten Position des $sql-Strings durch ein Leerzeichen ersetzen
+    $sql = substr_replace($sql, ' ', -2, 1);
+
+    // $sql-String vervollständigen
+    $sql .= " WHERE user_ID = $user_ID ;";
+
+  	if($sql_ok){
+  	  return get_result($sql);
+  	}else{
+  		return false;
+  	}
+  }
+	
 	function get_meine_reisen($user_ID){
 		$sql = "SELECT * FROM Reisen r, Users u WHERE r.user_ID = '$user_ID' ORDER BY r.Likes;";
 		return get_result($sql);

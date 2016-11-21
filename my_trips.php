@@ -11,8 +11,12 @@
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-
 	$post_list = get_meine_reisen($user_ID);
+
+  if(isset($_POST['delete_reise'])){
+    $delete_reise = $_POST['delete_reise'];
+    delete_reise($delete_reise);
+  }
 
 ?>
 
@@ -85,9 +89,12 @@
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
                   <?php } ?>
                   <p><?php echo $post['Beschreibung']; ?></p>
-
+                  <button type="submit" class="close" name="delete_reise" value="<?php echo $post['Reise_ID']; ?>">
+                    <span aria-hidden="true">Reise Löschen</span>
+                  </button>
 
                 </div>
+
 
               </div>
             </div>
