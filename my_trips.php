@@ -89,11 +89,12 @@
                     <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
                   <?php } ?>
                   <p><?php echo $post['Beschreibung']; ?></p>
-                  <button type="submit" class="close" name="delete_reise" value="<?php echo $post['Reise_ID']; ?>">
+                  <button type="submit" class="" name="delete_reise" value="<?php echo $post['Reise_ID']; ?>">
                     <span aria-hidden="true">Reise Löschen</span>
                   </button>
-
-
+                  <button type="submit" class="" name="change_reise" value="<?php echo $post['Reise_ID']; ?>">
+                    <span aria-hidden="true">Reise ändern</span>
+                  </button>
                 </div>
 
 
