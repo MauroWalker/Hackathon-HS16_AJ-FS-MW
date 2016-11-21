@@ -1,21 +1,23 @@
-<?php include ("header.php"); ?>
 
 <?php
   session_start();
 	if(!isset($_SESSION['user_ID'])){
 		header("Location:index.php");
 	}else{
-  	$user_id = $_SESSION['user_ID'];
+  	$user_ID = $_SESSION['user_ID'];
 	}
 
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$post_list = get_meine_reisen($user_ID);
 
-	$post_list = get__meine_reisen();
+  if(isset($_POST['delete_reise'])){
+    $delete_reise = $_POST['delete_reise'];
+    delete_reise($delete_reise);
+  }
+
 ?>
-<!--- oberer Teil immer einfügen ganz oben --->
-
 
 <html lang="en">
 <head>
@@ -61,7 +63,7 @@
   </style>
 </head>
 <body>
-
+  <?php include ("header.php"); ?>
 
 
 <div class="container-fluid text-center">
@@ -72,43 +74,33 @@
     <div class="col-sm-8 text-left">
 
 
+      <?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
+        <div class="row">
 
+          <form enctype="multipart/form-data" class="form-inline" method="post" action="<?PHP echo $_SERVER['PHP_SELF'] ?>">
+            <div class="col-xs-10">
+              <div class="panel panel-default p42panel">
+                <div class="panel-heading">
 
-        <!-- Beitrag -->
-        <?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
-          <div class="row">
-
-            <form enctype="multipart/form-data" class="form-inline" method="post" action="<?PHP echo $_SERVER['PHP_SELF'] ?>">
-              <div class="col-xs-10">
-                <div class="panel panel-default p42panel">
-                  <div class="panel-heading">
-
-                    <h3 class="panel-title"><?php echo $post['Reiseziel']; ?></h3>
-                  </div>
-                  <div class="panel-body">
-	                  <?php if($post['Bildquelle'] != NULL){  ?>
-                    <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
-<?php } ?>
-	                  1
-                    <p><?php echo $post['Beschreibung']; ?></p>
-
-
-                  </div>
-                  <div class="panel-footer text-right">
-                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
-                  </div>
+                  <h3 class="panel-title"><?php echo $post['Reiseziel']; ?></h3>
                 </div>
-              </div><!-- /col-sm-10 -->
-            </form>
-          </div> <!-- /Beitrag -->
-<?php   } ?>
+                <div class="panel-body">
+                  <?php if($post['Bildquelle'] != NULL){  ?>
+                    <img src="reisen_img/<?php echo $post['Bildquelle']; ?>" alt="postimage" class="img-responsive">
+                  <?php } ?>
+                  <p><?php echo $post['Beschreibung']; ?></p>
+                  <button type="submit" class="close" name="delete_reise" value="<?php echo $post['Reise_ID']; ?>">
+                    <span aria-hidden="true">Reise Löschen</span>
+                  </button>
 
 
+                </div>
 
 
-
-
-
+              </div>
+            </div>
+          </div>
+        <?php } ?>
 
     </div>
     <div class="col-sm-2 sidenav">
