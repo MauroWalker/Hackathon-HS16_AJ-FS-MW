@@ -46,5 +46,11 @@
     $sql = "SELECT * FROM Reisen";
 		return get_result($sql);
 	}
+	
+	function reise_like(){
+	    $sql = "INSERT INTO Reisen (Likes, Geliked_Von) VALUES ('+1', '$username');";
+	    echo "hallo";
+		return get_result($sql);	
+	}
 
 ?>

@@ -27,9 +27,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-  <script>
-	  $("#input-id").rating({min:1, max:10, step:1, size:'xs'});
-	  </script>
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -102,9 +99,21 @@
                   <div class="panel-footer text-right">
                     
 
+<form action="reise_like">
+<button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
+<span class="glyphicon glyphicon-thumbs-up" href="" aria-hidden="true"></span>
+</button>
+</form>
+
+<script>
+	
+$("reise_like").click(function(){
+	 $.get('data.php', reise_like(+1);
+	}
+</script>
 
 
-<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" action="reise_like"></span>
+
 <br>Anzahl Likes: <?php echo $post['Likes']; ?>
                     
                     
