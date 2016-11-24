@@ -52,8 +52,8 @@
 		return get_result($sql);
 	}
 
-	function write_comment($users_comment, $users_name, $reise_id){
-		$query = "INSERT INTO Kommentare (Kommentar, user_ID, Reise_ID) VALUES ('$users_comment', '$users_name', $reise_id);";
+	function write_comment($users_comment, $users_name, $comment_username, $reise_id){
+		$query = "INSERT INTO Kommentare (Kommentar, user_ID, username, Reise_ID) VALUES ('$users_comment', '$users_name', '$comment_username', '$reise_id');";
 	  return get_result($query);
 
 	}
