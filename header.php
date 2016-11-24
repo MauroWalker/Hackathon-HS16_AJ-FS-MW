@@ -12,6 +12,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="home.php">Home</a></li>
         <li><a href="my_trips.php">Meine Reisen</a></li>
+        <li><a href="reise_add.php">Reise erfassen</a></li>
         <li><a data-toggle="modal" data-target="#myModal">Profil</a></li>
         <li><a href="">Kontakt</a></li>
       </ul>
