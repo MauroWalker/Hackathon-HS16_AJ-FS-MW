@@ -41,6 +41,13 @@
 		return get_result($sql);
 	}
 
+	
+	function get_custom_reisen($plz_min, $plz_max){		 	
+    $sql = "SELECT * FROM Reisen WHERE PLZ BETWEEN '".$plz_min."' AND '".$plz_max."'";
+		return get_result($sql);
+	}
+
+
 	function get_username($user_id){
     $sql = "SELECT username FROM Users WHERE user_ID = '".$user_id."'";
 		return get_result($sql);

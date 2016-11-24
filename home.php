@@ -23,19 +23,39 @@ if(isset($_POST['comment-submit'])){
 }
 
 
+	// Abfrage der Userdaten
+	$result = get_user($user_ID);
+	$user = mysqli_fetch_assoc($result);
+
+
 	$post_list = get_reisen();
 
   $loginname_result = get_username($user_ID);
   $loginname = mysqli_fetch_assoc($loginname_result);
 
   $comment_list = get_comment();
+  
+  
+/* Custom Reisen */
+	if(isset($_POST['range-submit'])){
+	$user_range = $_POST['custom-range'];
+	$plz1 = $user['plz'];
+	$plz_min = $plz1 - $user_range;
+	$plz_max = $plz1 + $user_range; 
+	echo $plz_min;
+	echo $plz_max;
+	$post_list = get_custom_reisen($plz_min, $plz_max);
+	}
+ 
 
+
+
+
+/* Custom Reisen */
 
 /* Profileinstellungen */
 
-	// Abfrage der Userdaten
-	$result = get_user($user_ID);
-	$user = mysqli_fetch_assoc($result);
+
 
 
 	if(isset($_POST['update-submit'])){
@@ -148,9 +168,11 @@ if(isset($_POST['comment-submit'])){
 
 <div>
     <h5>Minimale Reisedistanz</h5>
-    <input type="range" value="0" max="450" step="10" data-rangeSlider>
+    <form method="post">
+    <input type="range" value="0" max="5000" step="100" name="custom-range" id="custom-range" data-rangeSlider>
     <output>km</output>
-    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    <input type="submit" name="range-submit" id="range-submit" name="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    </form>
 </div>
 
 <br>
