@@ -106,13 +106,13 @@ if(isset($_POST['comment-submit'])){
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      background-color: #ff0070;
       height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: #ff0070;
       color: white;
       padding: 15px;
     }
@@ -167,7 +167,7 @@ if(isset($_POST['comment-submit'])){
 	<div>
 
 <div>
-    <h5>Minimale Reisedistanz</h5>
+    <h5>Differenz zu eingetragener PLZ (nicht wirklich km!)</h5>
     <form method="post">
     <input type="range" value="0" max="5000" step="100" name="custom-range" id="custom-range" data-rangeSlider>
     <output>km</output>
