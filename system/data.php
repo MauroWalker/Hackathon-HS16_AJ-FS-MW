@@ -31,7 +31,7 @@
     $sql = "INSERT INTO Users (username, password, email, plz, ort) VALUES ('$username', '$password', '$email', '$plz', '$ort');";
 		return get_result($sql);
 	}
-	
+
 	function add_trip($Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region, $user_ID, $username) {
 	    $sql = "INSERT INTO Reisen (Reiseziel, Beschreibung, Kosten, Bildquelle, Dauer, PLZ, Ort, GA_benötigt, Region, Verfasser, user_ID) VALUES ('$Reiseziel', '$Beschreibung', '$Kosten', '$Bildquelle', '$Dauer', '$PLZ', '$Ort', '$GA_benötigt', '$Region', '$user_ID', '$username');";
 		return get_result($sql);

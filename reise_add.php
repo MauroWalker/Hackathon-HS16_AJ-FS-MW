@@ -8,15 +8,15 @@
 
 	require_once("system/data.php");
 	require_once("system/security.php");
-	
-	
+
+
 	$result = get_user($user_ID);
 	$user = mysqli_fetch_assoc($result);
 	$username = $user['username'];
-	
+
 	  $error_msg = "";
-	
-	
+
+
   	if(isset($_POST['add_new_trip-submit'])){
 		if(!empty($_POST['Reiseziel']) && !empty($_POST['Beschreibung']) && !empty($_POST['Kosten']) && !empty($_POST['Region']) && !		empty($_POST['Dauer']) && !empty($_POST['Bildquelle']) && !empty($_POST['Ort']) && !empty($_POST['GA_benötigt']) && !empty($_POST['PLZ'])){
       $Reiseziel = filter_data($_POST['Reiseziel']);
@@ -28,27 +28,27 @@
       $Ort = filter_data($_POST['Ort']);
       $GA_benötigt = filter_data($_POST['GA_benötigt']);
       $Region = filter_data($_POST['Region']);
-	  $result = add_trip($Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region, $username, $user_ID);  
-	  header("Location: my_trips.php"); 
-	  exit; 
-	  
-	  
-	  
-	  
-	  
+	  $result = add_trip($Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region, $username, $user_ID);
+	  header("Location: my_trips.php");
+	  exit;
+
+
+
+
+
 	  }else{
       $error_msg .= "Bitte füllen Sie alle Felder aus.</br>";
     }
   }
-  
 
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
 
 ?>
 
@@ -202,7 +202,7 @@
             <label for="PLZ" class="col-sm-2 form-control-label">PLZ</label>
             <div class="col-sm-4">
               <input  type="text" class="form-control form-control-sm"
-                      id="PLZ" placeholder="Dauer"
+                      id="PLZ" placeholder="PLZ"
                       name="PLZ" value="">
             </div>
           </div>
@@ -239,10 +239,10 @@
 	        <?php echo $error_msg?>
           <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
           <button type="submit" class="btn btn-success btn-sm" name="add_new_trip-submit">Reise speichern</button>
-          
-          
-          
-          
+
+
+
+
         </div>
       </form>
       </div>
@@ -251,7 +251,7 @@
 
 
 
- 
+
 
 
 
