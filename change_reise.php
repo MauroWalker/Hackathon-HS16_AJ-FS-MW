@@ -26,7 +26,10 @@
       $Region = filter_data($_POST['Region']);
 
       $result = change_reise($Reise_ID, $Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region);
+      header("Location: my_trips.php");
+      exit;
     }
+
 
   // Abfrage der Reisedaten
   $result = get_reise($Reise_ID);

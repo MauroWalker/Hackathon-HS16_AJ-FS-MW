@@ -40,7 +40,7 @@ if(isset($_POST['comment-submit'])){
 	$user_range = $_POST['custom-range'];
 	$plz1 = $user['plz'];
 	$plz_min = $plz1 - $user_range;
-	$plz_max = $plz1 + $user_range; 
+	$plz_max = $plz1 + $user_range;
 	$plz_max = $plz1 + $user_range;
 	echo $plz_min;
 	echo $plz_max;
