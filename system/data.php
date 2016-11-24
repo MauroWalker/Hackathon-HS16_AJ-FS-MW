@@ -40,8 +40,8 @@
 		return get_result($sql);
 	}
 
-	
-	function get_custom_reisen($plz_min, $plz_max){		 	
+
+	function get_custom_reisen($plz_min, $plz_max){
     $sql = "SELECT * FROM Reisen WHERE PLZ BETWEEN '".$plz_min."' AND '".$plz_max."'";
 		return get_result($sql);
 	}
@@ -118,6 +118,11 @@
 
 	function get_meine_reisen($user_ID){
 		$sql = "SELECT * FROM Reisen r LEFT JOIN Users u USING(user_ID) WHERE r.user_ID = '$user_ID' ORDER BY r.Likes;";
+		return get_result($sql);
+	}
+
+	function get_reise($Reise_ID){
+		$sql = "SELECT * FROM Reisen WHERE Reise_ID = '$Reise_ID'";
 		return get_result($sql);
 	}
 
