@@ -11,7 +11,6 @@
   function get_result($sql)
   {
     $db = get_db_connection();
-    // echo $sql;
     $result = mysqli_query($db, $sql);
     mysqli_close($db);
     return $result;
@@ -41,15 +40,40 @@
 		return get_result($sql);
 	}
 
+	
+	function get_custom_reisen($plz_min, $plz_max){		 	
+    $sql = "SELECT * FROM Reisen WHERE PLZ BETWEEN '".$plz_min."' AND '".$plz_max."'";
+		return get_result($sql);
+	}
+
+
 	function get_username($user_id){
     $sql = "SELECT username FROM Users WHERE user_ID = '".$user_id."'";
 		return get_result($sql);
 	}
 
 	function write_comment($users_comment, $users_name, $reise_id){
-		$query = "INSERT INTO Kommentare (Kommentar, Name, reise_id) VALUES ('$users_comment', '$users_name', $reise_id);";
+		$query = "INSERT INTO Kommentare (Kommentar, user_ID, Reise_ID) VALUES ('$users_comment', '$users_name', $reise_id);";
 	  return get_result($query);
+
 	}
+
+	function get_comment(){
+		$sql = "SELECT * FROM Kommentare";
+		return get_result($sql);
+	}
+
+	function get_comment_reise($reise_id){
+		$sql = "SELECT Kommentar FROM Kommentare WHERE reise_ID = '".$reise_id."'";
+		return get_result($sql);
+	}
+
+	function get_comment_username($reise_id){
+		$sql = "SELECT username FROM Kommentare WHERE reise_ID = '".$reise_id."'";
+		return get_result($sql);
+	}
+
+
 //	function comment($posttext, $owner, $image){
 //    $sql = "INSERT INTO Kommentare (Kommentar, Zeit) VALUES ('$posttext', '$owner');";
 //		return get_result($sql);
@@ -103,15 +127,6 @@
 
 	}
 
-	function get_comment(){
-		$sql = "SELECT * FROM Kommentare";
-		return get_result($sql);
-	}
-
-	function get_comment_reise($reise_id){
-		$sql = "SELECT Kommentar FROM Kommentare WHERE reise_ID = '".$reise_id."'";
-		return get_result($sql);
-	}
 
 	function change_reise($Reise_ID, $Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region){
   	$sql_ok = false;

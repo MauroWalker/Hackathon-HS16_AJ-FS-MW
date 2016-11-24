@@ -23,19 +23,39 @@ if(isset($_POST['comment-submit'])){
 }
 
 
+	// Abfrage der Userdaten
+	$result = get_user($user_ID);
+	$user = mysqli_fetch_assoc($result);
+
+
 	$post_list = get_reisen();
 
   $loginname_result = get_username($user_ID);
   $loginname = mysqli_fetch_assoc($loginname_result);
 
   $comment_list = get_comment();
+  
+  
+/* Custom Reisen */
+	if(isset($_POST['range-submit'])){
+	$user_range = $_POST['custom-range'];
+	$plz1 = $user['plz'];
+	$plz_min = $plz1 - $user_range;
+	$plz_max = $plz1 + $user_range; 
+	echo $plz_min;
+	echo $plz_max;
+	$post_list = get_custom_reisen($plz_min, $plz_max);
+	}
+ 
 
+
+
+
+/* Custom Reisen */
 
 /* Profileinstellungen */
 
-	// Abfrage der Userdaten
-	$result = get_user($user_ID);
-	$user = mysqli_fetch_assoc($result);
+
 
 
 	if(isset($_POST['update-submit'])){
@@ -86,13 +106,13 @@ if(isset($_POST['comment-submit'])){
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      background-color: #ff0070;
       height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: #ff0070;
       color: white;
       padding: 15px;
     }
@@ -147,10 +167,12 @@ if(isset($_POST['comment-submit'])){
 	<div>
 
 <div>
-    <h5>Minimale Reisedistanz</h5>
-    <input type="range" value="0" max="450" step="10" data-rangeSlider>
+    <h5>Differenz zu eingetragener PLZ (nicht wirklich km!)</h5>
+    <form method="post">
+    <input type="range" value="0" max="5000" step="100" name="custom-range" id="custom-range" data-rangeSlider>
     <output>km</output>
-    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    <input type="submit" name="range-submit" id="range-submit" name="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    </form>
 </div>
 
 <br>
@@ -306,14 +328,14 @@ if(isset($_POST['comment-submit'])){
 					<b>PLZ/Ort:</b>
 					<p><?php echo $post['PLZ']; ?>/<?php echo $post['Ort']; ?></p>
 					<b>GA Benötigt:</b>
-					<p><?php echo $post['GA_benötigt']; ?></p>	
+					<p><?php echo $post['GA_benötigt']; ?></p>
 					<b>Region:</b>
 					<p><?php echo $post['Region']; ?></p>
 					<b>Kategorie:</b>
-					<p><?php echo $post['Kategorie']; ?></p>						
-					
-					
-									
+					<p><?php echo $post['Kategorie']; ?></p>
+
+
+
                   </div>
                   <div class="panel-footer text-right">
 
