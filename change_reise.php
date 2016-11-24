@@ -179,8 +179,9 @@
 
               </div>
               <div class="modal-footer">
-                <a href="my_trips.php" class="btn btn-danger btn-sm" role="button">Abbrechen</a>
+                <a href="my_trips.php" class="btn btn-primary btn-sm" role="button">Zurück</a>
                 <button type="submit" class="btn btn-success btn-sm" name="update-submit">Änderungen speichern</button>
+
               </div>
             </form>
             </div>
