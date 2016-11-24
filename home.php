@@ -40,13 +40,10 @@ if(isset($_POST['comment-submit'])){
 	$user_range = $_POST['custom-range'];
 	$plz1 = $user['plz'];
 	$plz_min = $plz1 - $user_range;
-<<<<<<< HEAD
 	$plz_max = $plz1 + $user_range; 
-=======
 	$plz_max = $plz1 + $user_range;
 	echo $plz_min;
 	echo $plz_max;
->>>>>>> 166c69cde4336e92af72a7bbd5d0dea992391523
 	$post_list = get_custom_reisen($plz_min, $plz_max);
 	}
 
