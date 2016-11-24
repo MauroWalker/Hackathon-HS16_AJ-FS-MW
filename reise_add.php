@@ -202,7 +202,7 @@
             <label for="PLZ" class="col-sm-2 form-control-label">PLZ</label>
             <div class="col-sm-4">
               <input  type="text" class="form-control form-control-sm"
-                      id="PLZ" placeholder="Dauer"
+                      id="PLZ" placeholder="PLZ"
                       name="PLZ" value="">
             </div>
           </div>
