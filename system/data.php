@@ -121,6 +121,11 @@
 		return get_result($sql);
 	}
 
+	function get_reise($Reise_ID){
+		$sql = "SELECT * FROM Reisen WHERE Reise_ID = '$Reise_ID'";
+		return get_result($sql);
+	}
+
 	function delete_reise($Reise_ID){
 		$sql = "DELETE FROM Reisen WHERE Reise_ID = '$Reise_ID'";;
 		return get_result($sql);
