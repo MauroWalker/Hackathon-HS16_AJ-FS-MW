@@ -40,8 +40,8 @@
 		return get_result($sql);
 	}
 
-	
-	function get_custom_reisen($plz_min, $plz_max){		 	
+
+	function get_custom_reisen($plz_min, $plz_max){
     $sql = "SELECT * FROM Reisen WHERE PLZ BETWEEN '".$plz_min."' AND '".$plz_max."'";
 		return get_result($sql);
 	}
