@@ -13,15 +13,19 @@ if(isset($_POST['comment-submit'])){
   $users_comment = $_POST['comment'];
   $users_name = $_POST['name'];
   $reise_id = $_POST['articleid'];
-  $comment_username = $_POST['username_comment'];
 
   // $users_comment = mysql_real_escape_string($users_comment);
   // $users_name = mysql_real_escape_string($users_name);
 
-  write_comment($users_comment, $users_name, $comment_username, $reise_id);
+  write_comment($users_comment, $users_name, $reise_id);
 
 
 }
+
+
+	// Abfrage der Userdaten
+	$result = get_user($user_ID);
+	$user = mysqli_fetch_assoc($result);
 
 
 	$post_list = get_reisen();
@@ -29,12 +33,29 @@ if(isset($_POST['comment-submit'])){
   $loginname_result = get_username($user_ID);
   $loginname = mysqli_fetch_assoc($loginname_result);
 
+  $comment_list = get_comment();
+  
+  
+/* Custom Reisen */
+	if(isset($_POST['range-submit'])){
+	$user_range = $_POST['custom-range'];
+	$plz1 = $user['plz'];
+	$plz_min = $plz1 - $user_range;
+	$plz_max = $plz1 + $user_range; 
+	echo $plz_min;
+	echo $plz_max;
+	$post_list = get_custom_reisen($plz_min, $plz_max);
+	}
+ 
+
+
+
+
+/* Custom Reisen */
 
 /* Profileinstellungen */
 
-	// Abfrage der Userdaten
-	$result = get_user($user_ID);
-	$user = mysqli_fetch_assoc($result);
+
 
 
 	if(isset($_POST['update-submit'])){
@@ -85,13 +106,13 @@ if(isset($_POST['comment-submit'])){
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      background-color: #ff0070;
       height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: #ff0070;
       color: white;
       padding: 15px;
     }
@@ -146,10 +167,12 @@ if(isset($_POST['comment-submit'])){
 	<div>
 
 <div>
-    <h5>Minimale Reisedistanz</h5>
-    <input type="range" value="0" max="450" step="10" data-rangeSlider>
+    <h5>Differenz zu eingetragener PLZ (nicht wirklich km!)</h5>
+    <form method="post">
+    <input type="range" value="0" max="5000" step="100" name="custom-range" id="custom-range" data-rangeSlider>
     <output>km</output>
-    <input type="submit" name="range-submit" id="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    <input type="submit" name="range-submit" id="range-submit" name="range-submit" tabindex="4" class="form-control btn btn-login" value="Reisevorschläge aktualisieren">
+    </form>
 </div>
 
 <br>
@@ -317,11 +340,6 @@ if(isset($_POST['comment-submit'])){
                   <div class="panel-footer text-right">
 
 
-<form action="reise_like">
-<button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-thumbs-up" href="" aria-hidden="true"></span>
-</button>
-</form>
 
 
 
@@ -337,15 +355,13 @@ if(isset($_POST['comment-submit'])){
             <!--- Kommentare --->
 
             <?php
-            $comment_list = get_comment();
-            
             $comments_result = get_comment_reise($post['Reise_ID']);
             while($comment = mysqli_fetch_assoc($comments_result)) { ?>
 
             <div class="col-xs-10">
               <form method='post'>
                 <label for="name">
-                  <?php echo '"' . $comment['Kommentar'] . '"'; ?>
+                  <?php echo $comment['Kommentar']; ?>
                 </label>
               </form>
             </div>
@@ -358,12 +374,11 @@ if(isset($_POST['comment-submit'])){
                 <form method='post'>
                   <label for="name">Hallo <?php echo $loginname['username'] ?>, kommentiere doch diese Reise!</label>
                     <input type='hidden' name='name' id='name' value="<?php echo $_SESSION['user_ID']; ?>"/><br />
-                    <input type='hidden' name='username_comment' id='username_comment' value="<?php echo $user['username']; ?>"/><br />
+
                   <label for="comment">Kommentar:</label>
                     <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
 
                   <input type='hidden' name='articleid' id='articleid' value='<?php echo $post['Reise_ID']; ?>' />
-
 
                   <input type='submit' name="comment-submit" value='Submit' />
                 </form>              </div>

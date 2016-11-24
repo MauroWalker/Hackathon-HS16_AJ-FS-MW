@@ -40,6 +40,13 @@
 		return get_result($sql);
 	}
 
+	
+	function get_custom_reisen($plz_min, $plz_max){		 	
+    $sql = "SELECT * FROM Reisen WHERE PLZ BETWEEN '".$plz_min."' AND '".$plz_max."'";
+		return get_result($sql);
+	}
+
+
 	function get_username($user_id){
     $sql = "SELECT username FROM Users WHERE user_ID = '".$user_id."'";
 		return get_result($sql);
@@ -121,5 +128,56 @@
 	}
 
 
+	function change_reise($Reise_ID, $Reiseziel, $Beschreibung, $Kosten, $Bildquelle, $Dauer, $PLZ, $Ort, $GA_benötigt, $Region){
+  	$sql_ok = false;
+  	$sql = "UPDATE Reisen SET ";
+    if($Reiseziel != ""){
+      $sql .= "Reiseziel = '$Reiseziel', ";
+  		$sql_ok = true;
+    }
+		if($Beschreibung != ""){
+			$sql .= "Beschreibung = '$Beschreibung', ";
+			$sql_ok = true;
+		}
+		if($Kosten != ""){
+			$sql .= "Kosten = '$Kosten', ";
+			$sql_ok = true;
+		}
+		if($Bildquelle != ""){
+			$sql .= "Bildquelle = '$Bildquelle', ";
+			$sql_ok = true;
+		}
+		if($Dauer != ""){
+			$sql .= "Dauer = '$Dauer', ";
+			$sql_ok = true;
+		}
+		if($PLZ != ""){
+			$sql .= "PLZ = '$PLZ', ";
+			$sql_ok = true;
+		}
+		if($Ort != ""){
+			$sql .= "Ort = '$Ort', ";
+			$sql_ok = true;
+		}
+		if($GA_benötigt != ""){
+			$sql .= "GA_benötigt = '$GA_benötigt', ";
+			$sql_ok = true;
+		}
+		if($Region != ""){
+			$sql .= "Region = '$Region', ";
+			$sql_ok = true;
+		}
+    // Das Komma an der vorletzten Position des $sql-Strings durch ein Leerzeichen ersetzen
+    $sql = substr_replace($sql, ' ', -2, 1);
+
+    // $sql-String vervollständigen
+    $sql .= " WHERE Reise_ID = $Reise_ID;";
+
+  	if($sql_ok){
+  	  return get_result($sql);
+  	}else{
+  		return false;
+  	}
+  }
 
 ?>
