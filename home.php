@@ -328,14 +328,14 @@ if(isset($_POST['comment-submit'])){
 					<b>PLZ/Ort:</b>
 					<p><?php echo $post['PLZ']; ?>/<?php echo $post['Ort']; ?></p>
 					<b>GA Benötigt:</b>
-					<p><?php echo $post['GA_benötigt']; ?></p>	
+					<p><?php echo $post['GA_benötigt']; ?></p>
 					<b>Region:</b>
 					<p><?php echo $post['Region']; ?></p>
 					<b>Kategorie:</b>
-					<p><?php echo $post['Kategorie']; ?></p>						
-					
-					
-									
+					<p><?php echo $post['Kategorie']; ?></p>
+
+
+
                   </div>
                   <div class="panel-footer text-right">
 
