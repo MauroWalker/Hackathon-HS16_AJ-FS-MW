@@ -340,11 +340,6 @@ if(isset($_POST['comment-submit'])){
                   <div class="panel-footer text-right">
 
 
-<form action="reise_like">
-<button type="submit" name="reise_like" id="reise_like" class="btn btn-default" aria-label="Left Align">
-<span class="glyphicon glyphicon-thumbs-up" href="" aria-hidden="true"></span>
-</button>
-</form>
 
 
 
