@@ -13,11 +13,12 @@ if(isset($_POST['comment-submit'])){
   $users_comment = $_POST['comment'];
   $users_name = $_POST['name'];
   $reise_id = $_POST['articleid'];
+  $comment_username = $_POST['username_comment'];
 
   // $users_comment = mysql_real_escape_string($users_comment);
   // $users_name = mysql_real_escape_string($users_name);
 
-  write_comment($users_comment, $users_name, $reise_id);
+  write_comment($users_comment, $users_name, $comment_username, $reise_id);
 
 
 }
@@ -27,8 +28,6 @@ if(isset($_POST['comment-submit'])){
 
   $loginname_result = get_username($user_ID);
   $loginname = mysqli_fetch_assoc($loginname_result);
-
-  $comment_list = get_comment();
 
 
 /* Profileinstellungen */
@@ -338,13 +337,15 @@ if(isset($_POST['comment-submit'])){
             <!--- Kommentare --->
 
             <?php
+            $comment_list = get_comment();
+            
             $comments_result = get_comment_reise($post['Reise_ID']);
             while($comment = mysqli_fetch_assoc($comments_result)) { ?>
 
             <div class="col-xs-10">
               <form method='post'>
                 <label for="name">
-                  <?php echo $comment['Kommentar']; ?>
+                  <?php echo '"' . $comment['Kommentar'] . '"'; ?>
                 </label>
               </form>
             </div>
@@ -357,11 +358,12 @@ if(isset($_POST['comment-submit'])){
                 <form method='post'>
                   <label for="name">Hallo <?php echo $loginname['username'] ?>, kommentiere doch diese Reise!</label>
                     <input type='hidden' name='name' id='name' value="<?php echo $_SESSION['user_ID']; ?>"/><br />
-
+                    <input type='hidden' name='username_comment' id='username_comment' value="<?php echo $user['username']; ?>"/><br />
                   <label for="comment">Kommentar:</label>
                     <textarea name='comment' class="form-control" rows="5" id='comment'></textarea><br />
 
                   <input type='hidden' name='articleid' id='articleid' value='<?php echo $post['Reise_ID']; ?>' />
+
 
                   <input type='submit' name="comment-submit" value='Submit' />
                 </form>              </div>
