@@ -14,7 +14,7 @@
         <li><a href="my_trips.php">Meine Reisen</a></li>
         <li><a href="reise_add.php">Reise erfassen</a></li>
         <li><a data-toggle="modal" data-target="#myModal">Profil</a></li>
-        <li><a href="">Kontakt</a></li>
+        <li><a href="about.php">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="index.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
